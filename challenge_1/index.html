@@ -8,6 +8,9 @@
   body {
     font-family: "Courier";
   }
+  .hidden {
+    display: none;
+  }
 /*  span {
     background-color: red;
   }*/
@@ -17,7 +20,12 @@
 <body>
   <button id="reset" onclick="handleReset()">Reset</button>
   <p></p>
-  <p id="message"></p>
+  <p>Tally:</p>
+  <span id="scoreX"></span>   Player X - <span id="nameX"></span>
+  <p></p>
+  <span id="scoreO"></span>   Player O - <span id="nameO"></span>
+  <p></p>
+  <span id="message"></span><button id="next" class="hidden" onclick="handleNextRound()">Next Round</button>
   <p></p>
   <div>+-----+-----+-----+</div>
   <div>|<span id="r0c0" onclick="handleClick(this)"></span>|<span id="r0c1" onclick="handleClick(this)"></span>|<span id="r0c2" onclick="handleClick(this)"></span>|</div>

@@ -5,6 +5,8 @@ let matrix = [[0,0,0],[0,0,0],[0,0,0]];
 let currentPlayer = 1;
 let movesLeft = 9;
 let isGameEnded = false;
+let lastWinner = 1;
+let tally = {1: 0, 2: 0};
 const playerMap = {0: '&nbsp', 1: 'X', 2: 'O'};
 
 const togglePlayer = () => {
@@ -17,12 +19,18 @@ const updateMatrix = (row, column) => {
   matrix[row][column] = currentPlayer;
 }
 
-const resetGame = () => {
-  // resets board to all blanks
+const resetBoard = () => {
   matrix = [[0,0,0],[0,0,0],[0,0,0]];
-  currentPlayer = 1;
   movesLeft = 9;
   isGameEnded = false;
+  currentPlayer = lastWinner;
+}
+
+const resetGame = () => {
+  resetBoard();
+  currentPlayer = 1;
+  lastWinner = 1;
+  tally = {1: 0, 2: 0};
 }
 
 const isWinnerFound = () => {
@@ -62,11 +70,20 @@ const isWinnerFound = () => {
 // ************ View/Controller ***************
 
 const handleReset = (e) => {
+  document.getElementById('next').classList.add('hidden');
   resetGame();
   renderBoard();
   renderMessage();
+  renderTally();
 }
 
+
+const handleNextRound = () => {
+  document.getElementById('next').classList.add('hidden');
+  resetBoard();
+  renderBoard();
+  renderMessage();
+}
 
 // event.target is a jQuery thing!
 const handleClick = (elem) => {
@@ -78,14 +95,20 @@ const handleClick = (elem) => {
     const col = elem.id[3];
     matrix[row][col] = currentPlayer;
 
-    if (movesLeft === 0 || isWinnerFound()) {
+    if (movesLeft === 0) {
       isGameEnded = true;
+    } else if (isWinnerFound()) {
+      isGameEnded = true;
+      lastWinner = currentPlayer;
+      tally[currentPlayer]++;
+      document.getElementById('next').classList.remove('hidden');
     } else {
       togglePlayer();
     }
 
     renderBoard();
     renderMessage();
+    renderTally();
   }
 }
 
@@ -110,7 +133,22 @@ const renderMessage = () => {
   }
 }
 
+const renderTally = () => {
+  document.getElementById('scoreX').innerText = String(tally[1]).padStart(2, ' ');
+  document.getElementById('scoreO').innerText = String(tally[2]).padStart(2, ' ');
+}
+
+
+const renderNames = () => {
+  let nameX = window.prompt('Player X, please enter your name:');
+  let nameO = window.prompt('Player O, please enter your name:');
+  document.getElementById('nameX').innerText = nameX;
+  document.getElementById('nameO').innerText = nameO;
+}
+
 
 // ********** Initialization **************
+renderTally();
+renderNames();
 renderMessage();
 renderBoard();
