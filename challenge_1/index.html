@@ -3,18 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
   <title>Tic-Tac-Toe</title>
-  <style>
-  body {
-    font-family: "Courier";
-  }
-  .hidden {
-    display: none;
-  }
-/*  span {
-    background-color: red;
-  }*/
-  </style>
 </head>
 
 <body>
@@ -25,14 +15,29 @@
   <p></p>
   <span id="scoreO"></span>   Player O - <span id="nameO"></span>
   <p></p>
-  <span id="message"></span><button id="next" class="hidden" onclick="input.handleNextRound()">Next Round</button>
+  <span id="message"></span>&nbsp&nbsp&nbsp<button id="next" class="hidden" onclick="input.handleNextRound()">Next Round</button>
   <p></p>
-  <div>+-----+-----+-----+</div>
-  <div>|<span id="r0c0" onclick="input.handleClick(this)"></span>|<span id="r0c1" onclick="input.handleClick(this)"></span>|<span id="r0c2" onclick="input.handleClick(this)"></span>|</div>
-  <div>+-----+-----+-----+</div>
-  <div>|<span id="r1c0" onclick="input.handleClick(this)"></span>|<span id="r1c1" onclick="input.handleClick(this)"></span>|<span id="r1c2" onclick="input.handleClick(this)"></span>|</div>
-  <div>+-----+-----+-----+</div>
-  <div>|<span id="r2c0" onclick="input.handleClick(this)"></span>|<span id="r2c1" onclick="input.handleClick(this)"></span>|<span id="r2c2" onclick="input.handleClick(this)"></span>|</div>
-  <div>+-----+-----+-----+</div>
+  <div>
+<!--     <div>
+      <span id="r0c0" class="cell" onclick="input.handleClick(this)"></span>
+      <span id="r0c1" class="cell" onclick="input.handleClick(this)"></span>
+      <span id="r0c2" class="cell" onclick="input.handleClick(this)"></span>
+    </div> -->
+    <div>
+      <div id="r0c0" class="cell" onclick="input.handleClick(this)"></div>
+      <div id="r0c1" class="cell odd" onclick="input.handleClick(this)"></div>
+      <div id="r0c2" class="cell" onclick="input.handleClick(this)"></div>
+    </div>
+    <div>
+      <div id="r1c0" class="cell odd" onclick="input.handleClick(this)"></div>
+      <div id="r1c1" class="cell" onclick="input.handleClick(this)"></div>
+      <div id="r1c2" class="cell odd" onclick="input.handleClick(this)"></div>
+    </div>
+    <div>
+      <div id="r2c0" class="cell" onclick="input.handleClick(this)"></div>
+      <div id="r2c1" class="cell odd" onclick="input.handleClick(this)"></div>
+      <div id="r2c2" class="cell" onclick="input.handleClick(this)"></div>
+    </div>
+  </div>
   <script src="app.js"></script>
 </body>

@@ -1,0 +1,41 @@
+body {
+  /*font-family: "Courier";*/
+  font-family: "Georgia";
+}
+
+button {
+  border-radius: 5px;
+}
+
+#next {
+  background-color: SpringGreen;
+}
+
+#reset {
+  background-color: Pink;
+}
+
+.hidden {
+  display: none;
+}
+
+#message {
+  line-height: 50px;
+}
+
+.cell {
+  height: 50px;
+  line-height: 50px;
+  width: 50px;
+  text-align: center;
+  border: 2px solid gray;
+  display: inline-block;
+  margin-right: -5px;
+  margin-top: -2px;
+  font-family: "Arial";
+  font-size: 150%;
+}
+
+.odd {
+  background-color: lavender;
+}
