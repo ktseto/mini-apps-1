@@ -18,21 +18,21 @@
 </head>
 
 <body>
-  <button id="reset" onclick="handleReset()">Reset</button>
+  <button id="reset" onclick="input.handleReset()">Reset</button>
   <p></p>
   <p>Tally:</p>
   <span id="scoreX"></span>   Player X - <span id="nameX"></span>
   <p></p>
   <span id="scoreO"></span>   Player O - <span id="nameO"></span>
   <p></p>
-  <span id="message"></span><button id="next" class="hidden" onclick="handleNextRound()">Next Round</button>
+  <span id="message"></span><button id="next" class="hidden" onclick="input.handleNextRound()">Next Round</button>
   <p></p>
   <div>+-----+-----+-----+</div>
-  <div>|<span id="r0c0" onclick="handleClick(this)"></span>|<span id="r0c1" onclick="handleClick(this)"></span>|<span id="r0c2" onclick="handleClick(this)"></span>|</div>
+  <div>|<span id="r0c0" onclick="input.handleClick(this)"></span>|<span id="r0c1" onclick="input.handleClick(this)"></span>|<span id="r0c2" onclick="input.handleClick(this)"></span>|</div>
   <div>+-----+-----+-----+</div>
-  <div>|<span id="r1c0" onclick="handleClick(this)"></span>|<span id="r1c1" onclick="handleClick(this)"></span>|<span id="r1c2" onclick="handleClick(this)"></span>|</div>
+  <div>|<span id="r1c0" onclick="input.handleClick(this)"></span>|<span id="r1c1" onclick="input.handleClick(this)"></span>|<span id="r1c2" onclick="input.handleClick(this)"></span>|</div>
   <div>+-----+-----+-----+</div>
-  <div>|<span id="r2c0" onclick="handleClick(this)"></span>|<span id="r2c1" onclick="handleClick(this)"></span>|<span id="r2c2" onclick="handleClick(this)"></span>|</div>
+  <div>|<span id="r2c0" onclick="input.handleClick(this)"></span>|<span id="r2c1" onclick="input.handleClick(this)"></span>|<span id="r2c2" onclick="input.handleClick(this)"></span>|</div>
   <div>+-----+-----+-----+</div>
   <script src="app.js"></script>
 </body>
