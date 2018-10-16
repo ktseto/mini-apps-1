@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./styles/style.css">
   <title>Tic-Tac-Toe</title>
 </head>
 
 <body>
   <button id="reset" onclick="input.handleReset()">Reset</button>
+  <button id="twistyMode" onclick="input.handleTwisty()">Twisty Mode</button>
   <p></p>
   <p>Tally:</p>
   <span id="scoreX"></span>   Player X - <span id="nameX"></span>
@@ -17,12 +18,7 @@
   <p></p>
   <span id="message"></span>&nbsp&nbsp&nbsp<button id="next" class="hidden" onclick="input.handleNextRound()">Next Round</button>
   <p></p>
-  <div>
-<!--     <div>
-      <span id="r0c0" class="cell" onclick="input.handleClick(this)"></span>
-      <span id="r0c1" class="cell" onclick="input.handleClick(this)"></span>
-      <span id="r0c2" class="cell" onclick="input.handleClick(this)"></span>
-    </div> -->
+  <div id="board">
     <div>
       <div id="r0c0" class="cell" onclick="input.handleClick(this)"></div>
       <div id="r0c1" class="cell odd" onclick="input.handleClick(this)"></div>
@@ -39,5 +35,5 @@
       <div id="r2c2" class="cell" onclick="input.handleClick(this)"></div>
     </div>
   </div>
-  <script src="app.js"></script>
+  <script src="./scripts/app.js"></script>
 </body>

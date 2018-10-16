@@ -4,6 +4,7 @@ const state = {
   // 0 = blank, 1 = player X, 2 = player O
   matrix: [[0,0,0],[0,0,0],[0,0,0]],
   currentPlayer: 1,
+  // twistyMode: false,
   movesLeft: 9,
   isGameEnded: false,
   lastWinner: 1,
@@ -15,6 +16,10 @@ const state = {
   togglePlayer: function () {
     // changes state.currentPlayer to the next
     state.currentPlayer = state.currentPlayer === 1 ? 2 : 1;
+  },
+
+  toggleTwisty: function () {
+    state.twistyMode = !state.twistyMode;
   },
 
   updateMatrix: function (row, column) {
@@ -88,13 +93,24 @@ const input = {
 
   handleNextRound: function () {
     document.getElementById('next').classList.add('hidden');
+    // document.getElementById('board').classList.add('rotated');
     state.resetBoard();
     render.renderBoard();
     render.renderMessage();
   },
 
+  handleTwisty: function () {
+    state.toggleTwisty();
+    if (state.twistyMode) {
+      document.getElementById('twistyMode').classList.add('on');
+    } else {
+      document.getElementById('twistyMode').classList.remove('on');
+    }
+  },
+
   // event.target is a jQuery thing!
   handleClick: function (elem) {
+    // console.log(elem.id);
     const blank = Array(5).fill(String.fromCharCode(160)).join('');
 
     if (elem.innerText === blank && !state.isGameEnded) {

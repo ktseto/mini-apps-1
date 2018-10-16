@@ -36,6 +36,22 @@ button {
   font-size: 150%;
 }
 
+#board {
+  height: 155px;
+  width: 155px;
+}
+
 .odd {
   background-color: lavender;
 }
+
+/*
+.rotated {
+  transition: transform 1s;
+  transform: rotate(90deg);
+}
+
+.on {
+  background-color: OrangeRed;
+}
+*/
