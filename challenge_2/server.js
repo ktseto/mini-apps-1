@@ -32,7 +32,7 @@ const flatten = function (obj) {
 
 const template = function(csv) {
   return `
-    <form method="post">
+    <form action="/upload_json" method="post" enctype="multipart/form-data">
       <label for="jsonString">Enter JSON string:</label>
       <div><textarea id="jsonString" name="jsonString"></textarea></div>
       <input type="submit">
@@ -42,8 +42,8 @@ const template = function(csv) {
 };
 
 
-//app.post('/', (req, res) => {
-app.post('/', upload.single('jsonString'), (req, res) => {
+//app.post('/upload_json', (req, res) => {
+app.post('/upload_json', upload.single('jsonString'), (req, res) => {
   //const input = flatten(JSON.parse(req.body.jsonString));
   const input = flatten(JSON.parse(req.file.buffer.toString()));
 
