@@ -9,35 +9,54 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('client'));
 
-app.post('/', (req, res) => {
-  // JSON to CSV logic
-  // sends CSV & form
-  //console.log(req.body);
-  const input = req.body.jsonString;
 
-  const colUnique = {firstName: true, lastName: true, age: true};
-  const obj1 = {firstName: 'John', lastName: 'Smith'};
-  const obj2 = {firstName: 'Jane', lastName: 'Doe', age: 30};
-  const objList = [obj1, obj2];
-
-  const colNames = ['firstName', 'lastName', 'age'];
-  let csv = objList.map((obj) => {
-    return colNames.map((col) => obj[col]).join(',');
-  }).join('\n');
-
-  csv = colNames.join(',') + '\n' + csv;
+const flatten = function (obj) {
+  const result = [];
   
-  const template = `
+  const traverse = function (obj) {
+    result.push(obj);
+    obj.children.forEach(c => {
+      traverse(c);
+    })
+  }
+
+  traverse(obj);
+  return result;
+};
+
+
+const template = function(csv) {
+  return `
     <form method="post">
       <label for="jsonString">Enter JSON string:</label>
       <div><textarea id="jsonString" name="jsonString"></textarea></div>
       <input type="submit">
     </form>
-    <p>${csv}</p>
+    <pre>${csv}</pre>
   `;
+};
 
-  res.send(template);
+
+app.post('/', (req, res) => {
+  const input = flatten(JSON.parse(req.body.jsonString));
+
+  const colNames = new Set();
+  input.forEach(x => {
+    Object.keys(x).forEach(k => {
+      colNames.add(k);
+    })
+  })
+  colNames.delete('children');
+
+  let csv = input.map(obj => {
+    return [...colNames].map(col => obj[col]).join(',');
+  }).join('\n');
+
+  csv = [...colNames].join(',') + '\n' + csv;
+
+  res.send(template(csv));
 });
+
 
 app.listen(port, () => {
   console.log(`Listening at port ${port}`);
