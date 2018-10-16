@@ -6,9 +6,12 @@
   <title>JSON to CSV</title>
 </head>
 <body>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     <label for="jsonString">Enter JSON string:</label>
-    <div><textarea id="jsonString" name="jsonString"></textarea></div>
+    <div>
+      <!-- <textarea id="jsonString" name="jsonString"></textarea> -->
+      <input type="file" id="jsonString" name="jsonString">
+    </div>
     <input type="submit">
   </form>
 </body>

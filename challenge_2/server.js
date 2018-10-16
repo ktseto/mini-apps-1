@@ -1,13 +1,18 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const upload = multer(); // { dest: '...'} omitted -> in-memory only
+
 const port = 3000;
 
 const app = express();
 
+app.use(express.static('client'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('client'));
+
 
 
 const flatten = function (obj) {
@@ -37,8 +42,10 @@ const template = function(csv) {
 };
 
 
-app.post('/', (req, res) => {
-  const input = flatten(JSON.parse(req.body.jsonString));
+//app.post('/', (req, res) => {
+app.post('/', upload.single('jsonString'), (req, res) => {
+  //const input = flatten(JSON.parse(req.body.jsonString));
+  const input = flatten(JSON.parse(req.file.buffer.toString()));
 
   const colNames = new Set();
   input.forEach(x => {
