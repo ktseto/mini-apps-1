@@ -45,7 +45,6 @@ button {
   background-color: lavender;
 }
 
-/*
 .rotated {
   transition: transform 1s;
   transform: rotate(90deg);
@@ -54,4 +53,3 @@ button {
 .on {
   background-color: OrangeRed;
 }
-*/
