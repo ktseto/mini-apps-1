@@ -4,15 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JSON to CSV</title>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
 </head>
 <body>
-  <form action="/upload_json" method="post" enctype="multipart/form-data">
+
+<!--   <form action="/upload_json" method="post" enctype="multipart/form-data">
     <label for="jsonString">Enter JSON string:</label>
     <div>
-      <!-- <textarea id="jsonString" name="jsonString"></textarea> -->
       <input type="file" id="jsonString" name="jsonString">
     </div>
     <input type="submit">
+  </form> -->
+
+  <form enctype="multipart/form-data">
+    <label for="jsonString">Enter JSON string:</label>
+    <div>
+      <input type="file" id="jsonString" name="jsonString">
+    </div>
+    <input type="button" id="uploadButton" value="Upload">
   </form>
+  <script src="app.js"></script>
+
 </body>
 

@@ -31,11 +31,21 @@ const flatten = function (obj) {
 
 
 const template = function(csv) {
+  // return `
+  //   <form action="/upload_json" method="post" enctype="multipart/form-data">
+  //     <label for="jsonString">Enter JSON string:</label>
+  //     <div><textarea id="jsonString" name="jsonString"></textarea></div>
+  //     <input type="submit">
+  //   </form>
+  //   <pre>${csv}</pre>
+  // `;
   return `
-    <form action="/upload_json" method="post" enctype="multipart/form-data">
+    <form enctype="multipart/form-data">
       <label for="jsonString">Enter JSON string:</label>
-      <div><textarea id="jsonString" name="jsonString"></textarea></div>
-      <input type="submit">
+      <div>
+        <input type="file" id="jsonString" name="jsonString">
+      </div>
+      <input type="button" id="uploadButton" value="Upload">
     </form>
     <pre>${csv}</pre>
   `;
