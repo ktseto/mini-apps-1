@@ -2,11 +2,14 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const multer = require('multer');
+const fs = require('fs');
+const helper = require('./helper');
+
+console.log(helper);
+
 const upload = multer(); // { dest: '...'} omitted -> in-memory only
-
-const port = 3000;
-
 const app = express();
+const port = 3000;
 
 app.use(express.static('client'));
 
@@ -14,48 +17,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
-const flatten = function (obj) {
-  const result = [];
-  
-  const traverse = function (obj) {
-    result.push(obj);
-    obj.children.forEach(c => {
-      traverse(c);
-    })
-  }
-
-  traverse(obj);
-  return result;
-};
-
-
-const template = function(csv) {
-  // return `
-  //   <form action="/upload_json" method="post" enctype="multipart/form-data">
-  //     <label for="jsonString">Enter JSON string:</label>
-  //     <div><textarea id="jsonString" name="jsonString"></textarea></div>
-  //     <input type="submit">
-  //   </form>
-  //   <pre>${csv}</pre>
-  // `;
-  return `
-    <form enctype="multipart/form-data">
-      <label for="jsonString">Enter JSON string:</label>
-      <div>
-        <input type="file" id="jsonString" name="jsonString">
-      </div>
-      <input type="button" id="uploadButton" value="Upload">
-    </form>
-    <pre>${csv}</pre>
-  `;
-};
-
-
 //app.post('/upload_json', (req, res) => {
 app.post('/upload_json', upload.single('jsonString'), (req, res) => {
-  //const input = flatten(JSON.parse(req.body.jsonString));
-  const input = flatten(JSON.parse(req.file.buffer.toString()));
+  //const input = helper.flatten(JSON.parse(req.body.jsonString));
+  const input = helper.flatten(JSON.parse(req.file.buffer.toString()));
 
   const colNames = new Set();
   input.forEach(x => {
@@ -71,15 +36,20 @@ app.post('/upload_json', upload.single('jsonString'), (req, res) => {
 
   csv = [...colNames].join(',') + '\n' + csv;
 
-  res.send(template(csv));
-});
+  fs.readdir('client/csv', (err, list) => {
+    if (err) res.status(400).end();
 
+    const index = list.length === 0 ? 1 : 1 + Math.max(...list.map(f => Number(path.basename(f, '.csv'))));
+    const newFileBase = helper.padStart(String(index), '0', 5);
+    fs.writeFile(`client/csv/${newFileBase}.csv`, csv, (err) => {
+      if (err) res.status(400).end();
+      // res.send(helper.template(csv));
+      // res.send(`<pre>${csv}</pre>`);
+      res.send(newFileBase);
+    })
+  })
+});
 
 app.listen(port, () => {
   console.log(`Listening at port ${port}`);
 });
-
-
-// app.get('/', (req, res) => {
-//   //res.sendFile(path.join(__dirname, 'client/index.html'));
-// });

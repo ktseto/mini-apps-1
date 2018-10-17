@@ -7,7 +7,9 @@ $('#uploadButton').on('click', e => {
   xhr.onreadystatechange = () => {
     // XMLHttpRequest.DONE === 4
     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-      $('body')[0].innerHTML = xhr.responseText;
+      // $('body').html(xhr.responseText);
+      // $('pre').html(xhr.responseText);
+      $('#download').html(`<a href="csv/${xhr.responseText}.csv" download>Download your csv here</a>`);
     }
   }
 
