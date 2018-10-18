@@ -1,11 +1,21 @@
-const Board = () => (
+const Board = ({ matrix, handleBoardClick }) => (
   <div>
     {_.range(6).map(i => 
-      <div key={"r" + i}>{_.range(7).map(j =>
-        <div className="cell" id={"r" + i + "c" + j} key={"r" + i + "c" + j}></div>)}
+      <div key={ "r" + i }>
+        {_.range(7).map(j =>
+          <div className={ "player" + matrix[i][j] }
+               id={ "r" + i + "c" + j }
+               key={ "r" + i + "c" + j }
+               onClick={e => handleBoardClick(e)}>
+          </div>)}
       </div>
     )}
   </div>
 );
+
+// const Board = () => (
+//   <div>board</div>
+// )
+
 
 export default Board;
