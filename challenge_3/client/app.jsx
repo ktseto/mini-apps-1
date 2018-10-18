@@ -1,19 +1,79 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory as history } from 'react-router';
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { step: 'Home' };
+  }
+
+  handleHomeCheckOut() {
+    this.setState({ step: 'Account' });
+  }
+
+  handleAccountNext() {
+    this.setState({ step: 'Contact' });
+  }
+
+  handleContactNext() {
+    this.setState({ step: 'Billing' });
+  }
+
+  handleBillingNext() {
+    this.setState({ step: 'Confirm' });
+  }
+
+  handleConfirmPurchase() {
+    this.setState({ step: 'Home' });
+  }
+
+  // componentDidMount() {
+  //   this.setState({ step: 'Home' });
+  // }
+
+  render() {
+    return (
+      <div>
+        <div><Home currentStep={this.state.step} handleHomeCheckOut={this.handleHomeCheckOut.bind(this)}/></div>
+        <div><Account currentStep={this.state.step} handleAccountNext={this.handleAccountNext.bind(this)}/></div>
+        <div><Contact currentStep={this.state.step} handleContactNext={this.handleContactNext.bind(this)}/></div>
+        <div><Billing currentStep={this.state.step} handleBillingNext={this.handleBillingNext.bind(this)}/></div>
+        <div><Confirm currentStep={this.state.step} handleConfirmPurchase={this.handleConfirmPurchase.bind(this)}/></div>
+      </div>
+    );
+  }
+}
 
 
-
-const routes = (
-  <Route path='/' component={App}>
-    <IndexRoute component={Home} />
-    <Route component={Account} />
-    <Route component={Contact} />
-    <Route component={Billing} />
-    <Route component={Confirm} />
-  </Route>
+const Home = ({ currentStep, handleHomeCheckOut }) => (
+  <button style={{display: currentStep === 'Home' ? 'block' : 'none'}}
+          onClick={handleHomeCheckOut}>
+  Check Out</button>
 );
 
-ReactDOM.render()
+const Account = ({ currentStep, handleAccountNext }) => (
+  <button style={{display: currentStep === 'Account' ? 'block' : 'none'}}
+          onClick={handleAccountNext}>
+  Next</button>
+);
 
-// export default App;
+const Contact = ({ currentStep, handleContactNext }) => (
+  <button style={{display: currentStep === 'Contact' ? 'block' : 'none'}}
+          onClick={handleContactNext}>
+  Next</button>
+);
+
+const Billing = ({ currentStep, handleBillingNext }) => (
+  <button style={{display: currentStep === 'Billing' ? 'block' : 'none'}}
+          onClick={handleBillingNext}>
+  Next</button>
+);
+
+const Confirm = ({ currentStep, handleConfirmPurchase }) => (
+  <button style={{display: currentStep === 'Confirm' ? 'block' : 'none'}}
+          onClick={handleConfirmPurchase}>
+  Purchase</button>
+);
+
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('app')
+);
