@@ -8,9 +8,4 @@ const Messages = ({ endState, currentPlayer }) => (
   }</div>
 );
 
-
-// const Messages = () => (
-//   <div>messages</div>
-// );
-
 export default Messages;

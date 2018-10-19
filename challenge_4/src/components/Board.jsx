@@ -13,9 +13,4 @@ const Board = ({ matrix, handleBoardClick }) => (
   </div>
 );
 
-// const Board = () => (
-//   <div>board</div>
-// )
-
-
 export default Board;
