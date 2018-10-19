@@ -12,17 +12,23 @@ class App extends React.Component {
     };
   }
 
-  // _checkHorizontal() {
+  _getHorizontal(matrix) {
 
-  // }
+  }
 
-  // _checkVertical() {
+  _getVertical(matrix) {
 
-  // }
+  }
 
-  // _checkDiagonal() {
+  _getDiagonal(matrix) {
 
-  // }
+  }
+
+  getWinner(matrix) {
+    return _getHorizontal(matrix) ||
+           _getVertical(matrix) ||
+           _getDiagonal();
+  }
 
   handleBoardClick(e) {
     // find the bottomest, free cell of the column
@@ -31,10 +37,10 @@ class App extends React.Component {
     const targetRow = col.lastIndexOf(0);
 
     if (targetRow !== -1) {
-      const newMatrix = Object.assign({}, this.state.matrix);
+      const newMatrix = JSON.parse(JSON.stringify(this.state.matrix));  // deep copy
       newMatrix[targetRow][colnum] = this.state.currentPlayer;
 
-      const winner = this.getWinner();
+      const winner = this.getWinner(newMatrix);
 
       if (winner) {
         this.setState({
@@ -62,7 +68,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Messages />
+        <Messages endState={this.state.endState} currentPlayer={this.state.currentPlayer}/>
         <Board matrix={this.state.matrix} handleBoardClick={this.handleBoardClick.bind(this)}/>
       </div>
     );
